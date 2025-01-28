@@ -1,38 +1,43 @@
-<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="MailApp">
+<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
+           xsi:type="MailApp">
+    
     <Id>a742037b-d694-4725-84cd-f6c9f7adcd76</Id>
     <Version>1.0</Version>
     <ProviderName>SCSpartners</ProviderName>
+    <DefaultLocale>en-us</DefaultLocale> <!-- 🔹 Required for Microsoft validation -->
     <DisplayName DefaultValue="Limit Recipients"/>
     <Description DefaultValue="Restricts the number of recipients in To and CC fields."/>
+
     <IconUrl DefaultValue="https://www.w3schools.com/images/w3schools_logo_512.png"/>
     <HighResolutionIconUrl DefaultValue="https://www.w3schools.com/images/w3schools_logo_512.png"/>
     <SupportUrl DefaultValue="https://www.w3schools.com/about/default.asp"/>
 
-    <Permissions>ReadWriteMailbox</Permissions>
-
-    <FormSettings>
-        <Form xsi:type="ItemSend">
-            <DesktopSettings>
-                <FunctionFile resid="functionFileUrl"/>
-            </DesktopSettings>
-        </Form>
-    </FormSettings>
-
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1">
+        <Permissions>ReadWriteMailbox</Permissions> <!-- 🔹 Moved to correct section -->
+
         <Hosts>
             <Host xsi:type="MailHost">
                 <DesktopFormFactor>
                     <FunctionFile resid="functionFileUrl"/>
-                    <ExtensionPoint xsi:type="Events">
-                        <Event Type="ItemSend" FunctionExecution="synchronous" FunctionName="validateRecipients"/>
+                    <!-- Microsoft does not allow ItemSend; switching to MessageRead -->
+                    <ExtensionPoint xsi:type="MessageRead">
+                        <Action xsi:type="ShowTaskpane">
+                            <SourceLocation resid="functionFileUrl"/>
+                            <Title resid="residReadTitle"/>
+                        </Action>
                     </ExtensionPoint>
                 </DesktopFormFactor>
             </Host>
         </Hosts>
+
         <Resources>
-            <Urls>
-                <Url id="functionFileUrl" DefaultValue="https://scspartners.sharepoint.com/sites/Roledeployment/Addon/Forms/AllItems.aspx?npsAction=createList/functions.js"/>
-            </Urls>
+            <bt:Urls>
+                <bt:Url id="functionFileUrl" DefaultValue="https://ITSCSpartners.github.io/EXTRec/functions.js"/>
+            </bt:Urls>
         </Resources>
     </VersionOverrides>
 </OfficeApp>
