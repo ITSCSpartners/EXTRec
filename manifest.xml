@@ -36,7 +36,7 @@
 
         <Resources>
             <bt:Urls>
-                <bt:Url id="functionFileUrl" DefaultValue="https://ITSCSpartners.github.io/EXTRec/functions.js"/>
+                <bt:Url id="functionFileUrl" DefaultValue="https://raw.githubusercontent.com/ITSCSpartners/EXTRec/refs/heads/main/function.js"/>
             </bt:Urls>
         </Resources>
     </VersionOverrides>
