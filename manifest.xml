@@ -1,24 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
            xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
            xsi:type="MailApp">
     
+    <!-- Unique identifier for the add-in -->
     <Id>a742037b-d694-4725-84cd-f6c9f7adcd76</Id>
+    
+    <!-- Version number of the add-in -->
     <Version>1.0</Version>
+    
+    <!-- Provider information -->
     <ProviderName>SCSpartners</ProviderName>
-
-    <!-- Corrected Display Name with DefaultLocale -->
+    
+    <!-- Default locale for the add-in -->
     <DefaultLocale>en-US</DefaultLocale>
-    <DisplayName>Limit Recipients</DisplayName>
-
+    
+    <!-- Display name for the add-in -->
+    <DisplayName DefaultValue="Limit Recipients"/>
+    
+    <!-- Description of the add-in -->
     <Description DefaultValue="Restricts the number of recipients in To and CC fields."/>
+    
+    <!-- Icon URLs for the add-in -->
     <IconUrl DefaultValue="https://www.w3schools.com/images/w3schools_logo_512.png"/>
     <HighResolutionIconUrl DefaultValue="https://www.w3schools.com/images/w3schools_logo_512.png"/>
+    
+    <!-- Support URL for the add-in -->
     <SupportUrl DefaultValue="https://www.w3schools.com/about/default.asp"/>
-
+    
+    <!-- Permissions required by the add-in -->
     <Permissions>ReadWriteMailbox</Permissions>
-
+    
+    <!-- Form settings for the add-in -->
     <FormSettings>
         <Form xsi:type="ItemSend">
             <DesktopSettings>
@@ -26,7 +41,8 @@
             </DesktopSettings>
         </Form>
     </FormSettings>
-
+    
+    <!-- Version overrides for the add-in -->
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1">
         <Hosts>
             <Host xsi:type="MailHost">
@@ -38,7 +54,6 @@
                 </DesktopFormFactor>
             </Host>
         </Hosts>
-
         <Resources>
             <Urls>
                 <Url id="functionFileUrl" DefaultValue="https://raw.githubusercontent.com/ITSCSpartners/EXTRec/refs/heads/main/function.js"/>
