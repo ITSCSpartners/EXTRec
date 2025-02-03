@@ -1,31 +1,18 @@
-Office.onReady(() => {
-    Office.actions.associate("validateRecipients", validateRecipients);
-});
+function validateRecipients(event) {
+    const maxRecipients = 7; // Maksimālais atļautais saņēmēju skaits
 
-async function validateRecipients(event) {
-    try {
-        let message = Office.context.mailbox.item;
-        let toRecipients = await message.to.getAsync();
-        let ccRecipients = await message.cc.getAsync();
+    Office.context.mailbox.item.to.getAsync(function (toResult) {
+        Office.context.mailbox.item.cc.getAsync(function (ccResult) {
+            const totalRecipients = toResult.value.length + ccResult.value.length;
 
-        let totalRecipients = (toRecipients.value.length + ccRecipients.value.length);
-
-        if (totalRecipients > 7) {
-            Office.context.mailbox.item.notificationMessages.addAsync(
-                "recipientLimit",
-                {
-                    type: "error",
-                    message: "You cannot send emails to more than 7 recipients in 'To' and 'CC'.",
-                },
-                () => {
-                    event.completed({ allowEvent: false });
-                }
-            );
-        } else {
-            event.completed({ allowEvent: true });
-        }
-    } catch (error) {
-        console.error("Error checking recipients: ", error);
-        event.completed({ allowEvent: true });
-    }
+            if (totalRecipients > maxRecipients) {
+                event.completed({
+                    allowEvent: false,
+                    errorMessage: `Maksimālais saņēmēju skaits ir ${maxRecipients}.`
+                });
+            } else {
+                event.completed({ allowEvent: true });
+            }
+        });
+    });
 }
